@@ -1,0 +1,16 @@
+#clock{
+	color: white;
+	font-size: 170px;
+	text-align: center;
+	margin-top: 270px;
+	font-family: courier;
+	font-weight: 900;
+	z-index: 1;
+}
+
+#bodybg{
+  background-image:url("paint.gif");
+  background-size: cover;
+  z-index: -1;
+ 
+}
