@@ -27,47 +27,74 @@ $(document).ready(function() {
     var new_clock=document.getElementById("clock").innerHTML
     var clockdiv = document.getElementById("clock");
     clockdiv.innerHTML = hour + ":" + min + ":" + sec + " " + morning;
-   
-   var changeclock=$("#clock");
-    if (min % 2==0){
-      changeclock.css("color","white");
-      } else{
-      changeclock.css("color","black");
-      }
+  
+    if (min % 60==0){
+      return
+    }
+
+
     
 
+   var changeclock=$("#clock");
+    if (min % 60==0){
+        return
+      }
+    if (min % 2==0){
+      changeclock.css("color","white");
+    } else{
+    changeclock.css("color","black");
+    }
+
+    
   } // End of the displayTime function
 
-  function setbackground(){
-    var background=["green","red"];
-    var changebg=Math.floor((Math.random() * background.length));
-    console.log(changebg);
-    var body=$("#bodybg")
+  function setbackground(min){
+    currentTime = new Date(); 
+    var hour = currentTime.getHours();
+    var min = currentTime.getMinutes();
+    var sec = currentTime.getSeconds();
+    if (min % 5  == 0) {
+      var background=["green","red"];
+      var changebg=Math.floor((Math.random() * background.length));
+      console.log(changebg);
 
-    if (changebg==0){
-      body.css("background-image","url(rise.gif)");
+      var body=$("#bodybg")
+
+      if (changebg==0){
+        body.css("background-image","url(rise.gif)");
+      }
+      if (changebg==1){
+        body.css("background-image","url(set.gif)");
+      }
+    }else{
+      var body=$("#bodybg")
+      body.css("background-image","url(paint.gif)");
     }
+  }// End of the setbackground function
 
-    if (changebg==1){
-      body.css("background-image","url(set.gif)");
-    }
-  } // End of the setbackground function
-
-  function randomcolors(){
-    var colors=["red","green","orange"];
-    var x=Math.floor((Math.random() * 3));
+  function randomcolors(hour){
+    currentTime = new Date(); 
+    var hour = currentTime.getHours();
+    var min = currentTime.getMinutes();
+    var sec = currentTime.getSeconds();
+    if (min % 60==0 && sec==0){
+    var colors=["#2F4F4F","#829595","#0099CC","#7fffd4","#fddc54","#3c9f26","#ba025d"];
+    var x=Math.floor((Math.random() * 7));
     var clockcolor=$("#clock");
     clockcolor.css("color", colors[x])
     console.log(colors[x])
-    } 
+    }
+
+    }
+  
 
     setInterval(function(){displayTime() }, 1000);
-    setInterval(function(){randomcolors() }, 3.6e+6);
-    setInterval(function(){setbackground() }, 300000);
+    setInterval(function(){setbackground() }, 1000);
+    setInterval(function(){randomcolors() }, 1000);
      
      
 
-  }) // End of Document.ready
+  }); // End of Document.ready
 
   
 
